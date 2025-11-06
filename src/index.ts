@@ -1,8 +1,15 @@
-import { getThemes, getRandomAffirmation } from "./api/affirmations";
+import { getThemes, getRandomAffirmation, getRandomAffirmationByTheme } from "./api/affirmations";
 
 const themesDiv = document.getElementById("themes")!;
-const quoteEl = document.getElementById("quote")!;
 const btn = document.getElementById("random-quote")!;
+const quoteEl = document.getElementById("quote")!;
+
+async function loadRandomButton(){
+  btn.addEventListener("click", async () => {
+      const quote = await getRandomAffirmation();
+      quoteEl.textContent = quote;
+  });
+}
 
 async function loadThemes() {
   const themes = [
@@ -15,11 +22,11 @@ async function loadThemes() {
   document.querySelectorAll(".theme").forEach(el => {
     el.addEventListener("click", async () => {
       const theme = (el as HTMLElement).innerText;
-      const quote = await getRandomAffirmation(theme);
+      const quote = await getRandomAffirmationByTheme(theme);
       quoteEl.textContent = quote;
     });
   });
 }
 
-
+loadRandomButton();
 loadThemes();
