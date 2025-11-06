@@ -42,10 +42,15 @@ export async function getRandomAffirmationByTheme(theme: string): Promise<string
 
 export async function getThemes(): Promise<string[]>{
   try {
-    const response = await fetch(`${API_URL}/themes`, options); 
-    const result = await response.text();
-	  console.log(result);
-    return response.json();
+    const response = await fetch(`${API_URL}/themes`, options);
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch themes: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const themes = Array.isArray(data) ? data : data.themes;
+    return themes;
   }
   catch (error) {
     console.error(error);

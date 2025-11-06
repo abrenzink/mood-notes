@@ -12,11 +12,7 @@ async function loadRandomButton(){
 }
 
 async function loadThemes() {
-  const themes = [
-    "self-love", "confidence", "gratitude", "motivation",
-    "mindfulness", "health", "healing", "peace",
-    "abundance", "purpose", "growth", "relationships"
-  ];
+  const themes = await getThemes();
 
   themesDiv.innerHTML = themes.map(t => `<button class="theme">${t}</button>`).join("");
   document.querySelectorAll(".theme").forEach(el => {
