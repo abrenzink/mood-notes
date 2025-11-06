@@ -25,6 +25,7 @@ export class AffirmationService {
 
     if (!response.ok) throw new Error(`API error: ${response.status}`);
     const data = await response.json();
+    console.log(data.affirmation);
     return data.affirmation;
   }
 
@@ -36,6 +37,7 @@ export class AffirmationService {
 
     if (!response.ok) throw new Error(`API error: ${response.status}`);
     const data = await response.json();
+    console.log(data.affirmation);
     return data.affirmation;
   }
 
